@@ -12,10 +12,7 @@ namespace SaudiEvents.Services
     public class SaudiEventsService
     {
         readonly string serverURL = ServerURL.GetURL();
-
-        public SaudiEventsService()
-        {
-        }
+        HttpClient httpClient;
 
         private HttpClient GetClient()
         {
@@ -31,7 +28,7 @@ namespace SaudiEvents.Services
         {
             try
             {
-                var client = GetClient();
+                httpClient = GetClient();
                 string FormattedFromDate = String.Format("{0:ddd MMM dd yyyy}", FromDate);
                 string FormattedToDate = String.Format("{0:ddd MMM dd yyyy}", ToDate);
                 var eventsRequest = new EventsRequest
@@ -48,19 +45,20 @@ namespace SaudiEvents.Services
                     toDate = FormattedToDate
                  };
                 var SerializedRequest = JsonConvert.SerializeObject(eventsRequest);
-                HttpContent content = new StringContent(SerializedRequest, Encoding.UTF8, "application/json");
+                HttpContent requestContent = new StringContent(SerializedRequest, Encoding.UTF8, "application/json");
 
-                var response = client.PostAsync("/api/EventCalendar/SearchEvents", content).Result;
-                var responseString = await response.Content.ReadAsStringAsync();
+                var response = httpClient.PostAsync("/api/EventCalendar/SearchEvents", requestContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
                     return responseObject.Records;
                 }
                 else
                 {
                     return new List<Event>();
                 }
+
             }
             catch (Exception)
             {

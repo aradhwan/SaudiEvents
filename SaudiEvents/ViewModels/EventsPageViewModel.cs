@@ -4,16 +4,21 @@ using SaudiEvents.Models;
 
 namespace SaudiEvents.ViewModels
 {
-    public class EventsPageViewModel
+    public class EventsPageViewModel : BaseViewModel
     {
-        EventsManager eventsManager;
+        private EventsManager eventsManager;
+        private List<Event> eventsList;
 
-        public List<Event> Events { get { return eventsManager.Events; } }
+        public List<Event> Events 
+        {
+            get => eventsList;  
+            set { eventsList = value; RaisePropertyChanged(nameof(Events)); }
+        }
 
         public EventsPageViewModel()
         {
             eventsManager = new EventsManager();
+            Events = eventsManager.Events;
         }
     }
-
 }

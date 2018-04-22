@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using SaudiEvents.ViewModels;
-using System.Threading.Tasks;
 
 namespace SaudiEvents.Views
 {
@@ -11,13 +10,10 @@ namespace SaudiEvents.Views
         public EventsPage()
         {
             InitializeComponent();
-
         }
 		protected override void OnAppearing()
 		{
-            
             BindingContext = new EventsPageViewModel();
-            IsBusy = false;
 		}
 	}
 }
