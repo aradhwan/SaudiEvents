@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaudiEvents.Views.EventsPage"
+             Title="Events">
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Events}" SeparatorColor="#490848" HasUnevenRows="true">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding ImagePath, Mode=OneWay, Converter={StaticResource webImgConverter}}"
+                                   Aspect="AspectFit" Grid.Column="0" 
+                                   WidthRequest="150" />
+                            <StackLayout Orientation="Vertical" Grid.Column="1" >
+                                <Label Text="{Binding EventTitle}" FontAttributes="Bold" FontSize="Medium" TextColor="#490848"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="eventDate" WidthRequest="20" HeightRequest="20"/>
+                                    <Label Text="{Binding EventStartDate, StringFormat='{0:ddd dd MMM yyyy}'}" FontSize="Small" TextColor="Gray" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Image Source="locationCity" WidthRequest="20" HeightRequest="20"/>
+                                    <Label Text="{Binding CityEnName}" FontSize="Small" TextColor="Gray" />
+                                </StackLayout>
+                            </StackLayout>
+                         </Grid>
+                </ViewCell>    
+                <!--<ImageCell DetailColor="Gray"
+                           ImageSource="{Binding ImagePath, Mode=OneWay, Converter={StaticResource webImgConverter}}"
+                           Text="{Binding EventTitle}"
+                           Detail="{Binding EventStartDate, StringFormat='Date: {0:ddd MMM dd yyyy}'}" />
+                    -->
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

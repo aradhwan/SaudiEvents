@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:SaudiEvents" 
+             x:Class="SaudiEvents.Views.HomePage"
+             Title="Home">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" BackgroundColor="White">
+        <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5,20,5,5" />
+                    <On Platform="Android" Value="5,0,5,5" />
+                </OnPlatform>
+        </StackLayout.Padding>
+        <Image Source="HomeBg" Aspect="AspectFill" />
+        <Label Text="Welcome to Saudi Events!" HorizontalOptions="FillAndExpand" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        <Button x:Name="EventsButton" Text="Events" FontAttributes="Bold" FontSize="Small"
+                Command="{Binding ShowEventsCommand}"/>
+                <!--CommandParameter="{Binding Source={x:Reference EventsButton}, Path=Text}" /> -->
+        <Button x:Name="MediSupplier" Text="Medical Suppliers" FontAttributes="Bold" FontSize="Small"/>
+    </StackLayout>
+
+</ContentPage>
