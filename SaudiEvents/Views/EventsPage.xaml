@@ -4,6 +4,8 @@
              x:Class="SaudiEvents.Views.EventsPage"
              Title="Events">
     <ContentPage.Content>
+    <StackLayout Padding="5" Orientation="Vertical" VerticalOptions="FillAndExpand" >
+        <SearchBar Placeholder="Find event..." Text="{Binding SearchText}" HeightRequest="50" BackgroundColor="White"/>
         <ListView ItemsSource="{Binding Events}" SeparatorColor="#490848" HasUnevenRows="true">
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -40,5 +42,6 @@
             </DataTemplate>
         </ListView.ItemTemplate>
         </ListView>
+    </StackLayout>
     </ContentPage.Content>
 </ContentPage>

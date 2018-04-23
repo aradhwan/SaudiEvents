@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SaudiEvents.Models;
 using SaudiEvents.Services;
@@ -35,6 +36,18 @@ namespace SaudiEvents
         public async void GetEvents ()
         {
             Events = await eventService.GetEvents(this.FromDate, this.ToDate);
+        }
+
+        public List<Event> SearchEvents(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+            {
+                return Events;
+            }
+            else
+            {
+                return Events.Where(x => x.EventTitle.ToLower().Contains(text.ToLower())).ToList();
+            }
         }
     }
 }

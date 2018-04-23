@@ -8,6 +8,24 @@ namespace SaudiEvents.ViewModels
     {
         private EventsManager eventsManager;
         private List<Event> eventsList;
+        private string searchText;
+
+        public string SearchText
+        {
+            get
+            {
+                return searchText;
+            }
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    RaisePropertyChanged("SearchText");
+                    Events = eventsManager.SearchEvents(value);
+                }
+            }
+        }
 
         public List<Event> Events 
         {
