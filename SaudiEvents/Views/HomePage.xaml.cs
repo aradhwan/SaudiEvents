@@ -10,7 +10,7 @@ namespace SaudiEvents.Views
         public HomePage()
         {
             InitializeComponent();
-            this.BindingContext = new HomePageViewModel(Navigation);
+            //this.BindingContext = new HomePageViewModel(Navigation);
         }
     }
 }

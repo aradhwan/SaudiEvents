@@ -8,6 +8,10 @@
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="App.xaml.cs">

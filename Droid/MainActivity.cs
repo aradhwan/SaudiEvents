@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Acr.UserDialogs;
+using Prism;
+using Prism.Ioc;
 
 namespace SaudiEvents.Droid
 {
@@ -23,7 +25,16 @@ namespace SaudiEvents.Droid
             UserDialogs.Init(this);
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            LoadApplication(new App());
+            //LoadApplication(new App());
+            LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        public class AndroidInitializer : IPlatformInitializer
+        {
+            public void RegisterTypes(IContainerRegistry containerRegistry)
+            {
+                // Register any platform specific implementations
+            }
         }
     }
 }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Prism;
+using Prism.Ioc;
+
 using Foundation;
 using UIKit;
 
@@ -14,9 +17,17 @@ namespace SaudiEvents.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            LoadApplication(new App());
+            LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
+        }
+    }
+
+    public class iOSInitializer : IPlatformInitializer
+    {
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            // Register any platform specific implementations
         }
     }
 }

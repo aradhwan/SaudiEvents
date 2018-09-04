@@ -13,7 +13,7 @@ namespace SaudiEvents.Views
         }
 		protected override void OnAppearing()
 		{
-            BindingContext = new EventsPageViewModel();
+            //BindingContext = new EventsPageViewModel();
 		}
 	}
 }

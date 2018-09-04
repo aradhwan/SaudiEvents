@@ -1,42 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using Prism.Navigation;
 using SaudiEvents.Models;
 
 namespace SaudiEvents.ViewModels
 {
-    public class EventsPageViewModel : BaseViewModel
+    public class EventsPageViewModel : ViewModelBase
     {
         private EventsManager eventsManager;
-        private List<Event> eventsList;
-        private string searchText;
+        private List<Event> _events;
+        private string _searchText;
+
+        public EventsPageViewModel(INavigationService navigationService) : base(navigationService)
+        {
+            eventsManager = new EventsManager();
+            _events = eventsManager.Events;
+        }
 
         public string SearchText
         {
             get
             {
-                return searchText;
+                return _searchText;
             }
             set
             {
-                if (searchText != value)
+                if (_searchText != value)
                 {
-                    searchText = value;
+                    _searchText = value;
                     RaisePropertyChanged("SearchText");
                     Events = eventsManager.SearchEvents(value);
                 }
             }
         }
 
-        public List<Event> Events 
+        public List<Event> Events
         {
-            get => eventsList;  
-            set { eventsList = value; RaisePropertyChanged(nameof(Events)); }
-        }
-
-        public EventsPageViewModel()
-        {
-            eventsManager = new EventsManager();
-            Events = eventsManager.Events;
+            get => _events;
+            set { _events = value; RaisePropertyChanged(nameof(Events)); }
         }
     }
 }

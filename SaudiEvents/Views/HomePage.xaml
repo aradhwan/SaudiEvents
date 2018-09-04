@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:SaudiEvents" 
              x:Class="SaudiEvents.Views.HomePage"
-             Title="Home">
+             Title="Home"
+             NavigationPage.HasNavigationBar="false">
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" BackgroundColor="White">
         <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
