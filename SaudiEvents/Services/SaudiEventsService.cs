@@ -47,7 +47,8 @@ namespace SaudiEvents.Services
                 var SerializedRequest = JsonConvert.SerializeObject(eventsRequest);
                 HttpContent requestContent = new StringContent(SerializedRequest, Encoding.UTF8, "application/json");
 
-                var response = httpClient.PostAsync("/api/EventCalendar/SearchEvents", requestContent).Result;
+                var response = await httpClient.PostAsync("/api/EventCalendar/SearchEvents", requestContent);
+
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();

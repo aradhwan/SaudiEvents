@@ -120,9 +120,6 @@
     <Reference Include="Xamarin.Android.Support.Design">
       <HintPath>..\packages\Xamarin.Android.Support.Design.26.1.0.1\lib\MonoAndroid80\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.UserDialogs">
-      <HintPath>..\packages\Acr.UserDialogs.7.0.1\lib\monoandroid80\Acr.UserDialogs.dll</HintPath>
-    </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="System.Collections" />
     <Reference Include="System.IdentityModel" />
@@ -178,6 +175,10 @@
     <AndroidResource Include="Resources\drawable\HomeBg.png" />
     <AndroidResource Include="Resources\drawable\locationCity.png" />
     <AndroidResource Include="Resources\drawable\eventDate.png" />
+    <AndroidResource Include="Resources\drawable\baseline_autorenew_white_24.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\baseline_autorenew_white_24.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\baseline_autorenew_white_24.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\baseline_autorenew_white_24.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaudiEvents\SaudiEvents.csproj">

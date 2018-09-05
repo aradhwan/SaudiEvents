@@ -17,7 +17,7 @@
         <Button x:Name="EventsButton" Text="Events" FontAttributes="Bold" FontSize="Small"
                 Command="{Binding ShowEventsCommand}"/>
                 <!--CommandParameter="{Binding Source={x:Reference EventsButton}, Path=Text}" /> -->
-        <Button x:Name="MediSupplier" Text="Medical Suppliers" FontAttributes="Bold" FontSize="Small"/>
+        <!-- <Button x:Name="MediSupplier" Text="Medical Suppliers" FontAttributes="Bold" FontSize="Small"/> -->
     </StackLayout>
 
 </ContentPage>

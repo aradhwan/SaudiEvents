@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaudiEvents.Views.EventsPage"
              Title="Events">
-    <ContentPage.Content>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh" Icon="baseline_autorenew_white_24.png" Command="{Binding RefreshCommand}" />
+    </ContentPage.ToolbarItems>
     <StackLayout Padding="5" Orientation="Vertical" VerticalOptions="FillAndExpand" >
         <SearchBar Placeholder="Find event..." Text="{Binding SearchText}" HeightRequest="50" BackgroundColor="White"/>
-        <ListView ItemsSource="{Binding Events}" SeparatorColor="#490848" HasUnevenRows="true">
+        <ListView ItemsSource="{Binding Events}" SeparatorColor="#490848" 
+                  HasUnevenRows="true" IsPullToRefreshEnabled="true" 
+                  RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -43,5 +48,4 @@
         </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    </ContentPage.Content>
 </ContentPage>

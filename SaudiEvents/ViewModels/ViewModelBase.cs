@@ -10,8 +10,23 @@ namespace SaudiEvents.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
-
+        private bool _busy = false;
         private string _title;
+
+        public bool Busy
+        {
+            get { return _busy; }
+            set
+            {
+                if (_busy == value)
+                    return;
+
+                _busy = value;
+                RaisePropertyChanged("Busy");
+            }
+        }
+
+
         public string Title
         {
             get { return _title; }

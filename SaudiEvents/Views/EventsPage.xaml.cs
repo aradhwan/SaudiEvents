@@ -15,5 +15,6 @@ namespace SaudiEvents.Views
 		{
             //BindingContext = new EventsPageViewModel();
 		}
+
 	}
 }

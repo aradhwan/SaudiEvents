@@ -100,9 +100,6 @@
     <Reference Include="BTProgressHUD">
       <HintPath>..\packages\BTProgressHUD.1.2.0.6\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.UserDialogs">
-      <HintPath>..\packages\Acr.UserDialogs.7.0.1\lib\xamarinios10\Acr.UserDialogs.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
@@ -155,6 +152,9 @@
     <BundleResource Include="Resources\locationCity_2x.png" />
     <BundleResource Include="Resources\locationCity_3x.png" />
     <BundleResource Include="Resources\locationCity.png" />
+    <BundleResource Include="Resources\baseline_autorenew_white_24.png" />
+    <BundleResource Include="Resources\baseline_autorenew_white_24_2x.png" />
+    <BundleResource Include="Resources\baseline_autorenew_white_24_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaudiEvents\SaudiEvents.csproj">

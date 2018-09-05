@@ -13,7 +13,7 @@ namespace SaudiEvents
         private DateTime _fromDate = new DateTime(2017, 7, 27);
         private DateTime _toDate = new DateTime(2017, 12, 31);
 
-        public List<Event> Events { get; private set; }
+        private List<Event> events;
 
         public DateTime FromDate 
         {
@@ -30,23 +30,23 @@ namespace SaudiEvents
         public EventsManager()
         {
             eventService = new SaudiEventsService();
-            GetEvents();
         }
 
-        public async void GetEvents ()
+        public async Task<List<Event>> GetEvents ()
         {
-            Events = await eventService.GetEvents(this.FromDate, this.ToDate);
+            events = await eventService.GetEvents(this.FromDate, this.ToDate);
+            return events;
         }
 
         public List<Event> SearchEvents(string text)
         {
             if (String.IsNullOrEmpty(text))
             {
-                return Events;
+                return events;
             }
             else
             {
-                return Events.Where(x => x.EventTitle.ToLower().Contains(text.ToLower())).ToList();
+                return events.Where(x => x.EventTitle.ToLower().Contains(text.ToLower())).ToList();
             }
         }
     }
