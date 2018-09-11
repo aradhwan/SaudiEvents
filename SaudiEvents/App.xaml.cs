@@ -30,6 +30,7 @@ namespace SaudiEvents
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<HomePage>();
             containerRegistry.RegisterForNavigation<EventsPage>();
+            containerRegistry.RegisterForNavigation<EventDetails>();
         }
 
         //public App()

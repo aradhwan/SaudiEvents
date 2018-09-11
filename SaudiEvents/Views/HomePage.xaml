@@ -5,19 +5,40 @@
              x:Class="SaudiEvents.Views.HomePage"
              Title="Home"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" BackgroundColor="White">
-        <StackLayout.Padding>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="5,20,5,5" />
-                    <On Platform="Android" Value="5,0,5,5" />
-                </OnPlatform>
-        </StackLayout.Padding>
-        <Image Source="HomeBg" Aspect="AspectFill" />
-        <Label Text="Welcome to Saudi Events!" HorizontalOptions="FillAndExpand" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-        <Button x:Name="EventsButton" Text="Events" FontAttributes="Bold" FontSize="Small"
-                Command="{Binding ShowEventsCommand}"/>
-                <!--CommandParameter="{Binding Source={x:Reference EventsButton}, Path=Text}" /> -->
-        <!-- <Button x:Name="MediSupplier" Text="Medical Suppliers" FontAttributes="Bold" FontSize="Small"/> -->
-    </StackLayout>
-
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" BackgroundColor="White">
+            <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="5,20,5,5" />
+                        <On Platform="Android" Value="5,0,5,5" />
+                    </OnPlatform>
+            </StackLayout.Padding>
+            <Image Source="HomeBg" Aspect="AspectFill" />
+            <Label Text="Welcome to Saudi Events!" HorizontalOptions="FillAndExpand" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Grid HorizontalOptions="FillAndExpand" Margin="10,20,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Text="From" TextColor="Gray" HorizontalOptions="Center" FontSize="Small"
+                       Grid.Column="0" Grid.Row="0"/>
+                <DatePicker x:Name="fromDatePicker" MinimumDate="01/01/2017" HorizontalOptions="CenterAndExpand"
+                            Format="ddd dd MMM yyyy" Date="{Binding FromDate}"
+                            FontSize="Small" Grid.Column="0" Grid.Row="1"/>
+                <Label Text="To" TextColor="Gray" HorizontalOptions="Center" FontSize="Small"
+                       Grid.Column="1" Grid.Row="0"/>
+                <DatePicker MinimumDate="{Binding Source={x:Reference fromDatePicker},Path=Date}"
+                            HorizontalOptions="CenterAndExpand" Format="ddd dd MMM yyyy" Date="{Binding ToDate}"
+                            FontSize="Small" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+            <Button x:Name="EventsButton" Text="Show Events" FontAttributes="Bold" FontSize="Medium"
+                    Command="{Binding ShowEventsCommand}"/>
+                    <!--CommandParameter="{Binding Source={x:Reference EventsButton}, Path=Text}" /> -->
+            <!-- <Button x:Name="MediSupplier" Text="Medical Suppliers" FontAttributes="Bold" FontSize="Small"/> -->
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

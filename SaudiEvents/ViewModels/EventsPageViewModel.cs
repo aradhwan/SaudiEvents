@@ -11,6 +11,31 @@ namespace SaudiEvents.ViewModels
         private EventsManager eventsManager;
         private List<Event> _events;
 
+        private DateTime _fromDate { get; set; }
+        private DateTime _toDate { get; set; }
+
+        private Event _selectedEvent { get; set; }
+        public Event SelectedEvent
+        {
+            get { return _selectedEvent; }
+            set
+            {
+                if(_selectedEvent != value)
+                {
+                     _selectedEvent = value;
+                    RaisePropertyChanged(nameof(SelectedEvent));
+                    HandleSelectedEvent();
+                }
+            }
+        }
+
+        private async void HandleSelectedEvent()
+        {
+            NavigationParameters pairs = new NavigationParameters();
+            pairs.Add("Event", _selectedEvent);
+            await NavigationService.NavigateAsync("EventDetails", pairs);
+        }
+
         private bool _isRefreshing = false;
         public bool IsRefreshing
         {
@@ -22,26 +47,23 @@ namespace SaudiEvents.ViewModels
             }
         }
 
-        public DelegateCommand RefreshCommand
-        {
-            get
-            {
-                return new DelegateCommand(async () => 
-                {
-                    IsRefreshing = true;
+        public DelegateCommand RefreshCommand { get; private set; }
 
-                    SearchText = String.Empty;
-                    Events = await eventsManager.GetEvents();
-                
-                    IsRefreshing = false;
-                });
-            }
-        } 
+        private async void OnRefreshCommandExecuted()
+        {
+            IsRefreshing = true;
+
+            SearchText = String.Empty;
+            Events = await eventsManager.GetEvents(_fromDate,_toDate);
+            Events = eventsManager.SortAscending();
+            IsRefreshing = false;
+        }
 
         public EventsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             eventsManager = new EventsManager();
             // _events = eventsManager.Events;
+            RefreshCommand = new DelegateCommand(OnRefreshCommandExecuted);
         }
 
         private string _searchText;
@@ -66,6 +88,17 @@ namespace SaudiEvents.ViewModels
         {
             get => _events;
             set { _events = value; RaisePropertyChanged(nameof(Events)); }
+        }
+
+        public override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            if(parameters.GetNavigationMode() == NavigationMode.New)
+            {
+                _fromDate = (DateTime)parameters["FromDate"];
+                _toDate = (DateTime)parameters["ToDate"];
+                RefreshCommand.Execute();
+            }
+            base.OnNavigatedTo(parameters);
         }
     }
 }

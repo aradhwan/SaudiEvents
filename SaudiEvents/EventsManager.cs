@@ -10,32 +10,18 @@ namespace SaudiEvents
     public class EventsManager
     {
         private readonly SaudiEventsService eventService;
-        private DateTime _fromDate = new DateTime(2017, 7, 27);
-        private DateTime _toDate = new DateTime(2017, 12, 31);
 
         private List<Event> events;
-
-        public DateTime FromDate 
-        {
-            get { return _fromDate; } 
-            set { _fromDate = value; }
-        }
-
-        public DateTime ToDate
-        {
-            get { return _toDate; }
-            set { _toDate = value; }
-        }
 
         public EventsManager()
         {
             eventService = new SaudiEventsService();
         }
 
-        public async Task<List<Event>> GetEvents ()
+        public async Task<List<Event>> GetEvents (DateTime from, DateTime to)
         {
-            events = await eventService.GetEvents(this.FromDate, this.ToDate);
-            return events;
+            events = await eventService.GetEvents(from, to);
+            return events.OrderByDescending(x => x.EventStartDate).ToList();
         }
 
         public List<Event> SearchEvents(string text)
@@ -48,6 +34,16 @@ namespace SaudiEvents
             {
                 return events.Where(x => x.EventTitle.ToLower().Contains(text.ToLower())).ToList();
             }
+        }
+
+        public List<Event> SortAscending()
+        {
+            return events.OrderBy(x => x.EventStartDate).ToList();
+        }
+
+        public List<Event> SortDescending()
+        {
+            return events.OrderByDescending(x => x.EventStartDate).ToList();
         }
     }
 }

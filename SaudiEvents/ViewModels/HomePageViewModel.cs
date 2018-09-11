@@ -15,24 +15,52 @@ namespace SaudiEvents.ViewModels
         //public INavigation Navigation { get; private set; }
         //public ICommand ShowEventsCommand { get; private set; }
 
-        private DelegateCommand _showEventsCommand;
-        public DelegateCommand ShowEventsCommand => _showEventsCommand ?? (_showEventsCommand = new DelegateCommand(OnShowEventsCommandExecuted, CanShowEventsCommand));
+        private DateTime _fromDate { get; set; }
+        public DateTime FromDate
+        {
+            get { return _fromDate; }
+            set
+            {
+                if (_fromDate != value)
+                {
+                    _fromDate = value;
+                    RaisePropertyChanged(nameof(FromDate));
+                }
+            }
+        }
+
+        private DateTime _toDate { get; set; }
+        public DateTime ToDate
+        {
+            get { return _toDate; }
+            set
+            {
+                if (_toDate != value)
+                {
+                    _toDate = value;
+                    RaisePropertyChanged(nameof(ToDate));
+                }
+            }
+        }
+
+        public DelegateCommand ShowEventsCommand { get; private set; }
 
         public HomePageViewModel(INavigationService navigationService) : base(navigationService)
         {
             //this.Navigation = navigation;
             //this.ShowEventsCommand = new Command(async() => await GoToEventsPage());
+            FromDate = DateTime.Today;
+            ToDate = DateTime.Today;
+            ShowEventsCommand = new DelegateCommand(OnShowEventsCommandExecuted);
         }
 
-
-        private bool CanShowEventsCommand()
-        {
-            return true;
-        }
 
         private void OnShowEventsCommandExecuted()
         {
-            NavigationService.NavigateAsync("EventsPage");
+            NavigationParameters navParameters = new NavigationParameters();
+            navParameters.Add("FromDate", _fromDate);
+            navParameters.Add("ToDate", _toDate);
+            NavigationService.NavigateAsync("EventsPage",navParameters);
         }
 
 

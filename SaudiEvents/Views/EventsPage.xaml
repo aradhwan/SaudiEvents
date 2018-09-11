@@ -9,7 +9,7 @@
     </ContentPage.ToolbarItems>
     <StackLayout Padding="5" Orientation="Vertical" VerticalOptions="FillAndExpand" >
         <SearchBar Placeholder="Find event..." Text="{Binding SearchText}" HeightRequest="50" BackgroundColor="White"/>
-        <ListView ItemsSource="{Binding Events}" SeparatorColor="#490848" 
+        <ListView ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}" SeparatorColor="#490848" 
                   HasUnevenRows="true" IsPullToRefreshEnabled="true" 
                   RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ListView.ItemTemplate>
